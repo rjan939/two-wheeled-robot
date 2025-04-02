@@ -23,6 +23,15 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url = 'https://maven.brott.dev/'
+    }
+}
+
 dependencies {
     implementation project(':FtcRobotController')
+
+    implementation 'com.acmerobotics.dashboard:dashboard:0.4.16'
+    implementation "org.hipparchus:hipparchus-core:3.0"
 }
