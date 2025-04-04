@@ -5,23 +5,20 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.util.RobotHardware;
+import org.firstinspires.ftc.teamcode.util.drive.DriveState;
 import org.firstinspires.ftc.teamcode.util.drive.DriveType;
+import org.firstinspires.ftc.teamcode.util.drive.constants.BalanceConstants;
 import org.firstinspires.ftc.teamcode.util.lib.FtcDashboardManager;
 import org.firstinspires.ftc.teamcode.util.lib.GamepadButton;
 import org.firstinspires.ftc.teamcode.util.lib.StatefulGamepad;
 
+
 @Config
-@TeleOp(name="EasyDrive")
-public class EasyDrive extends LinearOpMode {
-
-    private RobotHardware robot;
-    protected DriveType getDriveType() {
-        return DriveType.SMOOTH;
-    }
-
+@TeleOp(name = "EasyDrivePID")
+public class EasyDrivePID extends LinearOpMode {
     @Override
-    public void runOpMode() throws InterruptedException {
-        robot = new RobotHardware(hardwareMap, getDriveType());
+    public void runOpMode() {
+        RobotHardware robot = new RobotHardware(hardwareMap, DriveType.SMOOTH, false);
 
         StatefulGamepad gamepad1Buttons = new StatefulGamepad(gamepad1);
         StatefulGamepad gamepad2Buttons = new StatefulGamepad(gamepad2);
@@ -38,19 +35,26 @@ public class EasyDrive extends LinearOpMode {
             gamepad1Buttons.update();
             gamepad2Buttons.update();
 
-            if (!gamepad1Buttons.getButton(GamepadButton.RIGHT_BUMPER)) {
-                robot.drive.drive(Math.max(Math.min(-gamepad1.left_stick_y + -gamepad2.left_stick_y, 1), -1), Math.max(Math.min(gamepad1.left_stick_x + gamepad2.left_stick_x, 1), -1), gamepad2Buttons.getButton(GamepadButton.LEFT_BUMPER));
-            } else {
-                robot.drive.drive(-gamepad2.left_stick_y, gamepad2.left_stick_x, gamepad1Buttons.getButton(GamepadButton.LEFT_BUMPER));
+            robot.drivePID.drive(-gamepad1.left_stick_y, gamepad1.left_stick_x, gamepad1Buttons.getButton(GamepadButton.LEFT_BUMPER));
+
+            if (gamepad1Buttons.getButton(GamepadButton.RIGHT_BUMPER)) {
+                robot.drivePID.resetTarget();
             }
 
-            if (gamepad2Buttons.getButton(GamepadButton.RIGHT_BUMPER)) {
-                robot.drive.brake();
+            if (gamepad1Buttons.getButton(GamepadButton.RIGHT_STICK_BUTTON)) {
+                robot.drivePID.emergencyStop();
             }
 
-            FtcDashboardManager.addData("Drive Type", robot.drive.getDriveType());
+            if (gamepad1Buttons.wasJustPressed(GamepadButton.LEFT_STICK_BUTTON) && robot.drivePID.getState() == DriveState.STOPPED) {
+                robot.upright();
+            }
+
+            if (gamepad1Buttons.wasJustPressed(GamepadButton.RIGHT_STICK_BUTTON)) {
+                robot.drivePID.setTargetAngle(BalanceConstants.TargetAngle);
+            }
 
             robot.update();
+
             FtcDashboardManager.update();
         }
     }

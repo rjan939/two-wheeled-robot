@@ -6,7 +6,7 @@ import org.firstinspires.ftc.teamcode.util.lib.PIDParams;
 @Config
 public class PIDConstants {
     private static final double WHEEL_DIAMETER = 3.54331;
-    private static final double TICKS_PER_REVOLUTE = 537.7 * 26 / 20;
+    private static final double TICKS_PER_REVOLUTE = 384.5 * 26 / 20;
     public static final double TICKS_PER_INCH = TICKS_PER_REVOLUTE / (WHEEL_DIAMETER * Math.PI);
 
 

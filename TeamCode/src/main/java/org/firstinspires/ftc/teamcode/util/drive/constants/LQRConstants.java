@@ -3,9 +3,13 @@ package org.firstinspires.ftc.teamcode.util.drive.constants;
 public class LQRConstants {
     private final static double GRAVITY = 9.81; // m/s^2
     public static double LENGTH = 0.04408; // length to center of mass (m) 0.04708
+
+    // TODO: Tune
     public static double MASS = 3.401942775; // kg (7.5 lbs)
-    public static double WHEEL_RADIUS = 0.05; // m
-    public static double TICKS_PER_REVOLUTE = 537.7 * 26 / 20;
+
+
+    public static double WHEEL_RADIUS = 0.045; // m
+    public static double TICKS_PER_REVOLUTE = 384.5 * 26 / 20;
 
     public static double M_PER_TICKS = (WHEEL_RADIUS * 2 * Math.PI) / TICKS_PER_REVOLUTE;
 

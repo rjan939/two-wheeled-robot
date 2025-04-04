@@ -16,7 +16,7 @@ import org.firstinspires.ftc.teamcode.util.lib.FtcDashboardManager;
 import org.hipparchus.linear.MatrixUtils;
 import org.hipparchus.linear.RealMatrix;
 
-public class GyroDrive {
+public class GyroDriveLQR {
     private final DcMotor leftMotor;
     private final DcMotor rightMotor;
 
@@ -57,7 +57,7 @@ public class GyroDrive {
 
     private boolean position = false;
 
-    public GyroDrive(HardwareMap hardwareMap, DriveType driveType) {
+    public GyroDriveLQR(HardwareMap hardwareMap, DriveType driveType) {
         leftMotor = hardwareMap.get(DcMotor.class, "left");
         rightMotor = hardwareMap.get(DcMotor.class, "right");
         rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
