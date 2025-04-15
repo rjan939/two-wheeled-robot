@@ -60,7 +60,6 @@ public class GyroDriveLQR {
     public GyroDriveLQR(HardwareMap hardwareMap, DriveType driveType) {
         leftMotor = hardwareMap.get(DcMotor.class, "left");
         rightMotor = hardwareMap.get(DcMotor.class, "right");
-        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         this.driveType = driveType;
 
