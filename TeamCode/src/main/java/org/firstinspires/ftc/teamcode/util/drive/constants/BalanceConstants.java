@@ -5,7 +5,7 @@ import org.firstinspires.ftc.teamcode.util.lib.PIDParams;
 
 @Config
 public class BalanceConstants {
-    public static double TargetAngle = -2;
+    public static double TargetAngle = -10;
 
     public static double MaxAngle = 60;
     public static boolean manualDrive = false;

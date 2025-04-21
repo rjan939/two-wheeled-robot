@@ -63,8 +63,8 @@ public class GyroDrivePID {
         imu.initialize(
                 new IMU.Parameters(
                         new RevHubOrientationOnRobot(
-                                RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
-                                RevHubOrientationOnRobot.UsbFacingDirection.LEFT
+                                RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,
+                                RevHubOrientationOnRobot.UsbFacingDirection.RIGHT
                         )
                 )
         );

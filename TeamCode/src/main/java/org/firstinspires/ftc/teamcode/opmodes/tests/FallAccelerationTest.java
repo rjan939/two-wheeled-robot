@@ -15,7 +15,6 @@ public class FallAccelerationTest extends LinearOpMode {
     public void runOpMode() {
         DcMotor leftMotor = hardwareMap.get(DcMotor.class, "left");
         DcMotor rightMotor = hardwareMap.get(DcMotor.class, "right");
-        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

@@ -14,7 +14,6 @@ public class DriveTest extends LinearOpMode {
     public void runOpMode() {
         DcMotor leftMotor = hardwareMap.get(DcMotor.class, "left");
         DcMotor rightMotor = hardwareMap.get(DcMotor.class, "right");
-        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         IMU imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(
@@ -31,7 +30,7 @@ public class DriveTest extends LinearOpMode {
         while (opModeIsActive() && !isStopRequested()) {
 //            leftMotor.setPower((gamepad1.left_stick_y + gamepad1.right_stick_x) * 0.25);
 //            rightMotor.setPower((gamepad1.left_stick_y - gamepad1.right_stick_x) * 0.25);
-            double correctionSpeed = Math.max(Math.min((imu.getRobotYawPitchRollAngles().getPitch(AngleUnit.DEGREES) - 2) * 0.04, 0.3), -0.3);
+            double correctionSpeed = Math.max(Math.min((imu.getRobotYawPitchRollAngles().getPitch(AngleUnit.DEGREES) + 10) * 0.04, 0.3), -0.3);
             leftMotor.setPower(correctionSpeed);
             rightMotor.setPower(correctionSpeed);
 
