@@ -174,13 +174,13 @@ public class GyroDriveLQR {
 
         updateCurrentVelocity();
 
-        if (Math.abs(targetVel) < 0.05) {
+        /*if (Math.abs(targetVel) < 0.05) {
             if (Math.abs(currentVel) > 0.1) {
                 targetVel *= 0.9;
             } else {
                 targetVel = 0;
             }
-        }
+        }*/
 
         if (Math.abs(targetVel) < 0.05 && Math.abs(currentVel) < 0.1) {
             //targetAngle *= 0.9;
