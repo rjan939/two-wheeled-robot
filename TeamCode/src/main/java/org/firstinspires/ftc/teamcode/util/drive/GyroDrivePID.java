@@ -52,8 +52,9 @@ public class GyroDrivePID {
     private boolean emergencyStop = false;
 
     public GyroDrivePID(HardwareMap hardwareMap) {
-        leftMotor = hardwareMap.get(DcMotor.class, "left");
-        rightMotor = hardwareMap.get(DcMotor.class, "right");
+        leftMotor = hardwareMap.get(DcMotor.class, "right");
+        rightMotor = hardwareMap.get(DcMotor.class, "left");
+        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

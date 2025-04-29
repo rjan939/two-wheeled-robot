@@ -14,6 +14,7 @@ public class DriveTest extends LinearOpMode {
     public void runOpMode() {
         DcMotor leftMotor = hardwareMap.get(DcMotor.class, "left");
         DcMotor rightMotor = hardwareMap.get(DcMotor.class, "right");
+        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         IMU imu = hardwareMap.get(IMU.class, "imu");
         imu.initialize(

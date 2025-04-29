@@ -13,6 +13,7 @@ public class WheelSpeedTest extends LinearOpMode {
     public void runOpMode() {
         DcMotor left = hardwareMap.get(DcMotor.class, "left");
         DcMotor right = hardwareMap.get(DcMotor.class, "right");
+        left.setDirection(DcMotorSimple.Direction.REVERSE);
         right.setDirection(DcMotorSimple.Direction.REVERSE);
 
         StatefulGamepad gamepad1Buttons = new StatefulGamepad(gamepad1);

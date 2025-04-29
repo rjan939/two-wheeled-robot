@@ -1,8 +1,12 @@
 package org.firstinspires.ftc.teamcode.opmodes.tests;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.teamcode.util.lib.FtcDashboardManager;
 
 @TeleOp(name="MotorTests")
 public class MotorTests extends LinearOpMode {
@@ -19,8 +23,9 @@ public class MotorTests extends LinearOpMode {
      */
     @Override
     public void runOpMode() throws InterruptedException {
-        DcMotor leftMotor = hardwareMap.get(DcMotor.class, "left");
-        DcMotor rightMotor = hardwareMap.get(DcMotor.class, "right");
+        DcMotor leftMotor = hardwareMap.get(DcMotor.class, "right");
+        DcMotor rightMotor = hardwareMap.get(DcMotor.class, "left");
+        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         waitForStart();
 
@@ -33,6 +38,9 @@ public class MotorTests extends LinearOpMode {
             }
             leftMotor.setPower(0);
             rightMotor.setPower(0);
+            FtcDashboardManager.addData("Left", leftMotor.getCurrentPosition());
+            FtcDashboardManager.addData("Right", rightMotor.getCurrentPosition());
+            FtcDashboardManager.update();
         }
     }
 }

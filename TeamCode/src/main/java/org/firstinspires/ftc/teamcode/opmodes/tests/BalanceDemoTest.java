@@ -14,6 +14,8 @@ public class BalanceDemoTest extends LinearOpMode {
     public void runOpMode() {
         DcMotor leftMotor = hardwareMap.get(DcMotor.class, "left");
         DcMotor rightMotor = hardwareMap.get(DcMotor.class, "right");
+        leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

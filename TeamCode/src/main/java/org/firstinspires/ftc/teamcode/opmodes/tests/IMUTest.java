@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
+import org.firstinspires.ftc.teamcode.util.lib.FtcDashboardManager;
 
 @TeleOp(name = "IMUTest", group = "tests")
 public class IMUTest extends LinearOpMode {
@@ -26,11 +27,9 @@ public class IMUTest extends LinearOpMode {
 
         while (opModeIsActive() && !isStopRequested()) {
             YawPitchRollAngles angles = imu.getRobotYawPitchRollAngles();
-            telemetry.addLine("IMU Angles");
-            telemetry.addData("Heading", angles.getYaw(AngleUnit.DEGREES));
+            FtcDashboardManager.addData("Pitch", angles.getPitch(AngleUnit.DEGREES));
             telemetry.addData("Pitch", angles.getPitch(AngleUnit.DEGREES));
             telemetry.addData("Roll", angles.getRoll(AngleUnit.DEGREES));
-
             telemetry.addLine();
 
             AngularVelocity velocity = imu.getRobotAngularVelocity(AngleUnit.DEGREES);
@@ -40,6 +39,7 @@ public class IMUTest extends LinearOpMode {
             telemetry.addData("Z", velocity.zRotationRate);
 
             telemetry.update();
+            FtcDashboardManager.update();
         }
     }
 }

@@ -34,16 +34,18 @@ public class LQRConstants {
         };
     }
 
-    public static double AnglePenalty = 1;
-    public static double AngularVelocityPenalty = 0.0;
-    public static double PositionPenalty = 10;
-    public static double VelocityPenalty = 1;
+
+    // TODO:
+    public static double AnglePenalty = 1.0;
+    public static double AngularVelocityPenalty = 0;
+    public static double PositionPenalty = 3.0;
+    public static double VelocityPenalty = 0.5;
 
     public static double[] getQ() {
         return new double[]{AnglePenalty, AngularVelocityPenalty, PositionPenalty, VelocityPenalty}; // state penalty, x, x dot, theta, theta dot
     }
 
-    public static double R = 0.1;
+    public static double R = 0.5;
 
     public static double VelocityModifier = 10000;
     public static double PositionModifier = 1;
@@ -52,5 +54,5 @@ public class LQRConstants {
     public static double StoppedMargin = 0.2;
     public static double StoppedTime = 2;
 
-    public static boolean UpdateLQRGains = false;
+    public static boolean UpdateLQRGains = true;
 }

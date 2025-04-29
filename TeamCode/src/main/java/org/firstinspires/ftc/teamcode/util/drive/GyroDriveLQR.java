@@ -58,8 +58,13 @@ public class GyroDriveLQR {
     private boolean position = false;
 
     public GyroDriveLQR(HardwareMap hardwareMap, DriveType driveType) {
-        leftMotor = hardwareMap.get(DcMotor.class, "left");
-        rightMotor = hardwareMap.get(DcMotor.class, "right");
+        leftMotor = hardwareMap.get(DcMotor.class, "right");
+        rightMotor = hardwareMap.get(DcMotor.class, "left");
+        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         this.driveType = driveType;
 
@@ -169,6 +174,18 @@ public class GyroDriveLQR {
 
         updateCurrentVelocity();
 
+        if (Math.abs(targetVel) < 0.05) {
+            if (Math.abs(currentVel) > 0.1) {
+                targetVel *= 0.9;
+            } else {
+                targetVel = 0;
+            }
+        }
+
+        if (Math.abs(targetVel) < 0.05 && Math.abs(currentVel) < 0.1) {
+            //targetAngle *= 0.9;
+        }
+
         double currentAngle = angles.getPitch(AngleUnit.DEGREES);
 
         RealMatrix currentState = getCurrentState(currentAngle, pitchRate, currentVel);
@@ -190,7 +207,7 @@ public class GyroDriveLQR {
         updateState();
 
         FtcDashboardManager.addData("Angle", currentAngle);
-        FtcDashboardManager.addData("AngleError", currentAngle);
+        FtcDashboardManager.addData("AngleError", currentAngle-targetAngle);
         FtcDashboardManager.addData("PitchRate", pitchRate);
         FtcDashboardManager.addData("CurrentVelocity", currentVel);
         FtcDashboardManager.addData("TargetVelocity", targetVel);
@@ -235,7 +252,7 @@ public class GyroDriveLQR {
 
         double targetVel = this.targetVel;
 
-        if (targetVel == 0 && stopping) {
+        /*if (targetVel == 0 && stopping) {
             targetVel = (-currentVel / Math.abs(currentVel)) * Math.min(Math.abs(currentVel) * LQRConstants.StoppingAmount, SpeedConstants.Stopping);
         } else if (targetVel != 0 && stopping) {
             stopping = false;
@@ -248,7 +265,7 @@ public class GyroDriveLQR {
                 stopping = false;
                 stoppingTimer = null;
             }
-        }
+        }*/
 
         return MatrixUtils.createRealMatrix(new double[][]{
                 {target}, // pitch angle

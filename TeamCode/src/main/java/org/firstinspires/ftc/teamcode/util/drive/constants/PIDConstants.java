@@ -30,9 +30,9 @@ public class PIDConstants {
 
     public static double LargeAnglePIDMargin = 20;
 
-    public static PIDParams SmallAnglePID = new PIDParams(0.08, 0.00005, 1, 0.1); // 0.06, 0.0002, 1
-    public static PIDParams LargeAnglePID = new PIDParams(0.1, 0.0001, 1, 0.2);
-    public static PIDParams VelPID = new PIDParams(-0.03, 0.000, 0.2, 0.3); //-0.08, 0, 0
+    public static PIDParams SmallAnglePID = new PIDParams(0.04, 0.000025, 0.5, 0.05); // 0.06, 0.0002, 1
+    public static PIDParams LargeAnglePID = new PIDParams(0.05, 0.00005, 0.5, 0.1);
+    public static PIDParams VelPID = new PIDParams(-0.0075, 0.000, 0.1, 0.15); //-0.08, 0, 0
 
-    public static PIDParams MotorPID = new PIDParams(0.0012, 0.000, 0, 0.3);
+    public static PIDParams MotorPID = new PIDParams(0.0006, 0.000, 0, 0.15);
 }
