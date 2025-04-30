@@ -38,13 +38,8 @@ public class EasyDriveLQR extends LinearOpMode {
             gamepad1Buttons.update();
             gamepad2Buttons.update();
 
-            if (!gamepad1Buttons.getButton(GamepadButton.RIGHT_BUMPER)) {
-                //robot.driveLQR.drive(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1Buttons.getButton(GamepadButton.LEFT_BUMPER));
-            } else {
-                robot.driveLQR.drive(-gamepad2.left_stick_y, gamepad2.left_stick_x, gamepad1Buttons.getButton(GamepadButton.LEFT_BUMPER));
-            }
             robot.driveLQR.drive(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1Buttons.getButton(GamepadButton.LEFT_BUMPER));
-            if (gamepad2Buttons.getButton(GamepadButton.X)) {
+            if (gamepad1Buttons.getButton(GamepadButton.X)) {
                 robot.driveLQR.brake();
             }
 

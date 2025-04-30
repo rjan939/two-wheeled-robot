@@ -5,7 +5,7 @@ import com.acmerobotics.dashboard.config.Config;
 @Config
 public class LQRConstants {
     private final static double GRAVITY = 9.81; // m/s^2
-    public static double LENGTH = 0.04408; // length to center of mass (m) 0.04708
+    public static double LENGTH = 0.027; // length to center of mass (m) 0.04708
 
     // TODO: Tune
     public static double MASS = 2.71125168088; // kg (5.98 lbs)
@@ -36,16 +36,17 @@ public class LQRConstants {
 
 
     // TODO:
-    public static double AnglePenalty = 1.0;
+    public static double AnglePenalty = 6.0;
     public static double AngularVelocityPenalty = 0;
-    public static double PositionPenalty = 3.0;
-    public static double VelocityPenalty = 0.5;
+    public static double PositionPenalty = 11.0;
+    public static double VelocityPenalty = 9.0;
 
     public static double[] getQ() {
         return new double[]{AnglePenalty, AngularVelocityPenalty, PositionPenalty, VelocityPenalty}; // state penalty, x, x dot, theta, theta dot
     }
 
-    public static double R = 0.5;
+    // old r = 0.5
+    public static double R = 0.8;
 
     public static double VelocityModifier = 10000;
     public static double PositionModifier = 1;

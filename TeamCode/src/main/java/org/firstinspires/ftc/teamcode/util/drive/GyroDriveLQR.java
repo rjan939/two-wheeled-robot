@@ -174,6 +174,15 @@ public class GyroDriveLQR {
 
         updateCurrentVelocity();
 
+        /*if (Math.abs(targetVel) < 0.05 && isBalanced() && !position) {
+            targetPos = currentPos;
+            position = true;
+        }
+
+         if (Math.abs(targetVel) >= 0.05) {
+             position = false;
+         }*/
+
         /*if (Math.abs(targetVel) < 0.05) {
             if (Math.abs(currentVel) > 0.1) {
                 targetVel *= 0.9;
@@ -197,7 +206,15 @@ public class GyroDriveLQR {
         if (driveType == DriveType.NONE) {
             setPower(0, 0);
         } else {
-            setPower(output[0] + rotationVel, output[1] - rotationVel);
+            double left = output[0] + rotationVel;
+            double right = output[1] - rotationVel;
+
+            left = Math.max(Math.min(left, 1.0), -1.0);
+            right = Math.max(Math.min(right, 1.0), -1.0);
+
+            left *= 0.7;
+            right *= 0.7;
+            setPower(left, right);
         }
 
         if (targetVel == 0 || BalanceConstants.AngleAssistedDriving) {
@@ -267,11 +284,16 @@ public class GyroDriveLQR {
             }
         }*/
 
+        double adjustedTargetVel = targetVel;
+        if (Math.abs(targetVel) < 0.05 && Math.abs(currentVel) > 0.05) {
+            adjustedTargetVel = -currentVel * 0.3; // tune braking coefficient, 0.2-0.5
+        }
+
         return MatrixUtils.createRealMatrix(new double[][]{
                 {target}, // pitch angle
                 {0}, // pitch rate
                 {targetPos}, // position
-                {targetVel} // velocity
+                {adjustedTargetVel} // velocity
         });
     }
 

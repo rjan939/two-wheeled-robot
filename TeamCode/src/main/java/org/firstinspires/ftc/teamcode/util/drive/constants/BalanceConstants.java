@@ -5,13 +5,13 @@ import org.firstinspires.ftc.teamcode.util.lib.PIDParams;
 
 @Config
 public class BalanceConstants {
-    public static double TargetAngle = -5.2;
+    public static double TargetAngle = -6.5;
 
-    public static double MaxAngle = 60;
+    public static double MaxAngle = 30;
     public static boolean manualDrive = true;
     public static boolean MotorPIDEnabled = false;
 
-    public static double MaxPlaceAngle = 20;
+    public static double MaxPlaceAngle = 10;
     public static double PlaceDelay = 0.5;
 
     public static boolean UpdateAngle = true;
